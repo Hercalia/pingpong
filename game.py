@@ -27,7 +27,10 @@ clock = pygame.time.Clock()
 fps = 60
 screenupt = True
 font1 = pygame.font.Font(None, 80)
+font2 = pygame.font.Font(None, 36)
 win = 0
+score1 = 0
+score2 = 0
 while run:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
@@ -60,20 +63,28 @@ while run:
         if ball.left <= 0:
             ball.x -= ball_speed_x*2
             ball_speed_x = -ball_speed_x
-            screenupt = False
-            screen.blit(font1.render("Player 2 wins", True, (255, 255, 255)), (width // 2 - 200, height // 2 - 50))
-            win = 2
+            ball.x = width//2
+            ball.y = height//2
+            score2 += 1
 
         if ball.right >= width:
             ball.x -= ball_speed_x*2
             ball_speed_x = -ball_speed_x
-            screenupt = False
-            screen.blit(font1.render("Player 1 wins", True, (255, 255, 255)), (width // 2 - 200, height // 2 - 50))
+            ball.x = width//2
+            ball.y = height//2
+            score1 += 1
+        if score1 == 10:
             win = 1
-        screen.fill((0, 0, 0))
+            screenupt = False
+        if score2 >= 10:
+            win = 2
+            screenupt = False
+        screen.fill((0, 255, 0))
         screen.blit(imageracket,(racket1.x,racket1.y))
         screen.blit(imageracket,(racket2.x,racket2.y))
         screen.blit(tennis,(ball.x,ball.y))
+        screen.blit(font2.render("player1:"+str(score1), True, (255, 255, 255)), (100, 50))
+        screen.blit(font2.render("player2:"+str(score2), True, (255, 255, 255)), (width-400, 50))
         pygame.display.flip()
     else:
         if win == 1:
