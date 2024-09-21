@@ -46,11 +46,11 @@ while run:
     if screenupt:
         ball.x += ball_speed_x
         if ball.colliderect(racket1) or ball.colliderect(racket2):
-            ball.x -= ball_speed_x*2
+            ball.x -= ball_speed_x
             ball_speed_x = -ball_speed_x
         ball.y += ball_speed_y
         if ball.colliderect(racket1) or ball.colliderect(racket2):
-            ball.y -= ball_speed_y*2
+            ball.y -= ball_speed_y
             ball_speed_y = -ball_speed_y
 
         if ball.top <= 0 or ball.bottom >= height:
